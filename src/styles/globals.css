@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+	--font-montserrat: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif,
+		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-bricolage: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif,
+		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+	--color-gradient-primary: linear-gradient(90deg, #3EB9E5 0%, #A759A3 49.52%, #F7A442 100%);
+}
+
