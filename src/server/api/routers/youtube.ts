@@ -220,6 +220,8 @@ export const youtubeRouter = createTRPCRouter({
 			return {
 				title: video.snippet?.title ?? "",
 				viewerCount: parseInt(video.statistics?.viewCount ?? "0"),
+				thumbnailUrl: video.snippet?.thumbnails?.maxres?.url || video.snippet?.thumbnails?.high?.url || "",
+				duration: video.contentDetails?.duration || "0",
 			};
 		}),
 

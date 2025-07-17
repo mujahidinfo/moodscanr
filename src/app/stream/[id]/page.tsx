@@ -17,12 +17,13 @@ export default async function StreamPage({
 	}
 
 	return (
-		<HydrateClient>
-			<div className="min-h-screen text-white bg-gradient-to-b from-[#2e026d] to-[#15162c]">
-				<main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-					<StreamMonitor streamId={id} />
-				</main>
-			</div>
-		</HydrateClient>
-	);
+    <HydrateClient>
+      <div className="min-h-screen">
+        <Navbar session={session} />
+        <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+          <StreamMonitor streamId={id} />
+        </main>
+      </div>
+    </HydrateClient>
+  );
 } 
