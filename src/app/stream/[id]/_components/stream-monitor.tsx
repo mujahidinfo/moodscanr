@@ -256,7 +256,7 @@ export function StreamMonitor({ streamId }: { streamId: string }) {
       </div>
 
       {/* Chat Messages */}
-      <div className="rounded-lg bg-white/5 p-6">
+      <div className="rounded-lg bg-gray-600/5 p-6">
         <h2 className="mb-4 text-xl font-semibold">Live Chat</h2>
         <div className="h-[400px] space-y-2 overflow-y-auto">
           {messages.map((message) => (
