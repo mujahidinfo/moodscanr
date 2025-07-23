@@ -134,10 +134,15 @@ export async function GET(
 					// Add sentiments to messages with error handling
 					const messagesWithSentiment = messages.map((msg, index) => {
 						const sentimentResult = sentiments[index] || { sentiment: 'neutral', score: 0 };
+						// Defensive: ensure score is a valid number
+						let safeScore = sentimentResult.score;
+						if (typeof safeScore !== 'number' || isNaN(safeScore)) {
+							safeScore = 0;
+						}
 						return {
 							...msg,
 							sentiment: sentimentResult.sentiment,
-							sentimentScore: sentimentResult.score,
+							sentimentScore: safeScore,
 						};
 					});
 

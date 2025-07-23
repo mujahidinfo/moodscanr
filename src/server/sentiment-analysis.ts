@@ -54,15 +54,23 @@ export async function analyzeSentiment(text: string): Promise<SentimentResult> {
     try {
         const analyzer = await initializeAnalyzer();
         const result = await analyzer(text);
-        console.log("result", result);
-        
-        if (!result?.[0]) {
-            throw new Error('Invalid sentiment analysis result');
+        // Defensive: ensure result is an array and has expected structure
+        if (!Array.isArray(result) || !result[0] || typeof result[0] !== 'object') {
+            console.error('analyzeSentiment: Invalid result structure', result);
+            throw new Error('Invalid sentiment analysis result structure');
+        }
+        if (!('label' in result[0]) || typeof result[0].label !== 'string') {
+            console.error('analyzeSentiment: Missing or invalid label in result', result[0]);
+            throw new Error('Missing or invalid label in sentiment analysis result');
+        }
+        if (!('score' in result[0]) || typeof result[0].score !== 'number' || isNaN(result[0].score)) {
+            console.error('analyzeSentiment: Missing or invalid score in result', result[0]);
+            throw new Error('Missing or invalid score in sentiment analysis result');
         }
 
         const sentiment = mapSentiment(result[0].label);
-        const score = result[0].score || 0;
-        
+        const score = result[0].score;
+
         const sentimentResult: SentimentResult = {
             sentiment,
             score
@@ -102,22 +110,32 @@ export async function analyzeBatchSentiments(messages: string[]): Promise<Sentim
 
     try {
         const analyzer = await initializeAnalyzer();
-        
         // Process in smaller batches to avoid memory issues
         const BATCH_SIZE = 10;
         const results: SentimentResult[] = [];
-        
+
         for (let i = 0; i < messages.length; i += BATCH_SIZE) {
             const batch = messages.slice(i, i + BATCH_SIZE);
             const batchResults = await Promise.all(
-                batch.map(msg => analyzeSentiment(msg))
+                batch.map(async (msg) => {
+                    try {
+                        const result = await analyzeSentiment(msg);
+                        // Defensive: ensure result is valid
+                        if (!result || typeof result.sentiment !== 'string' || typeof result.score !== 'number' || isNaN(result.score)) {
+                            return { sentiment: 'neutral' as Sentiment, score: 0 };
+                        }
+                        return result;
+                    } catch (e) {
+                        return { sentiment: 'neutral' as Sentiment, score: 0 };
+                    }
+                })
             );
             results.push(...batchResults);
         }
-        
+
         return results;
     } catch (error) {
         console.error('Error in batch sentiment analysis:', error);
-        return messages.map(() => ({ sentiment: 'neutral', score: 0 }));
+        return messages.map(() => ({ sentiment: 'neutral' as Sentiment, score: 0 }));
     }
 } 
