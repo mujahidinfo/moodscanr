@@ -25,24 +25,70 @@ export const HowItWorksSection = () => {
   ]
 
   return (
-  <section className="w-full bg-white py-16 flex flex-col items-center text-center container mx-auto px-4">
-    <h3 className="text-5xl font-extrabold mb-8 bg-gradient-to-r from-[#3EB9E5] via-[#A759A3] to-[#F7A442] bg-clip-text text-transparent">HOW IT WORKS</h3>
-    <div className="flex flex-col gap-6 items-center max-w-2xl mx-auto mb-6">
-      {howItWorks.map((item, index) => (
-        <div key={index} className="flex md:flex-row flex-col items-center gap-3">
-          <span className={`inline-flex items-center justify-center w-8 h-8 text-black ${item.iconPosition === "left" ? "md:order-1" : "md:order-2"}`}>
-            {item.icon}
-          </span>
-          <span className={`ml-2 text-3xl font-light ${item.iconPosition === "left" ? "md:text-left md:order-2" : "md:text-right md:order-1"}`}>{item.title}</span>
+    <section className="w-full bg-white py-16 flex flex-col items-center text-center container mx-auto px-4">
+      <h3 className="text-5xl font-extrabold mb-8 bg-gradient-to-r from-[#3EB9E5] via-[#A759A3] to-[#F7A442] bg-clip-text text-transparent">
+        HOW IT WORKS
+      </h3>
+
+      {/* Video Section */}
+      <div className="w-full max-w-4xl mb-12">
+        <div className="relative group">
+          <div className="absolute -inset-1 bg-gradient-to-r from-[#3EB9E5] via-[#A759A3] to-[#F7A442] rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+          <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden">
+            <div className="aspect-video w-full">
+              <iframe
+                src="https://www.youtube.com/embed/J1W-b57E4Gs?rel=0&modestbranding=1&showinfo=0"
+                title="MoodScanr - How It Works"
+                className="w-full h-full"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
         </div>
-      ))}
+        <p className="text-lg text-gray-600 mt-4 font-medium">
+          Watch our explainer video to see MoodScanr in action
+        </p>
       </div>
-    <p className="font-bold text-2xl my-10 bg-gradient-to-r from-[#3EB9E5] via-[#A759A3] to-[#F7A442] bg-clip-text text-transparent">Instant feedback. Real emotions. Smarter content.</p>
-    <p className="font-light text-2xl mb-10 text-black">Click below to connect your YouTube Channel</p>
-    <Link href="/dashboard">
-      <button className="px-10 py-2 border-2 border-white rounded-full text-white font-semibold shadow-md bg-gradient-to-r from-[#3EB9E5] via-[#A759A3] to-[#F7A442] hover:opacity-90 transition">Connect</button>
-    </Link>
-  </section>
-  )
+
+      <div className="flex flex-col gap-6 items-center max-w-2xl mx-auto mb-6">
+        {howItWorks.map((item, index) => (
+          <div
+            key={index}
+            className="flex md:flex-row flex-col items-center gap-3"
+          >
+            <span
+              className={`inline-flex items-center justify-center w-8 h-8 text-black ${
+                item.iconPosition === "left" ? "md:order-1" : "md:order-2"
+              }`}
+            >
+              {item.icon}
+            </span>
+            <span
+              className={`ml-2 text-3xl font-light ${
+                item.iconPosition === "left"
+                  ? "md:text-left md:order-2"
+                  : "md:text-right md:order-1"
+              }`}
+            >
+              {item.title}
+            </span>
+          </div>
+        ))}
+      </div>
+      <p className="font-bold text-2xl my-10 bg-gradient-to-r from-[#3EB9E5] via-[#A759A3] to-[#F7A442] bg-clip-text text-transparent">
+        Instant feedback. Real emotions. Smarter content.
+      </p>
+      <p className="font-light text-2xl mb-10 text-black">
+        Click below to connect your YouTube Channel
+      </p>
+      <Link href="/dashboard">
+        <button className="px-10 py-2 border-2 border-white rounded-full text-white font-semibold shadow-md bg-gradient-to-r from-[#3EB9E5] via-[#A759A3] to-[#F7A442] hover:opacity-90 transition">
+          Connect
+        </button>
+      </Link>
+    </section>
+  );
 }
   
