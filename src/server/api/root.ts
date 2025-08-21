@@ -1,6 +1,8 @@
 import { postRouter } from "~/server/api/routers/post";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 import { youtubeRouter } from "~/server/api/routers/youtube";
+import { userRouter } from "./routers/user";
+import { overviewRouter } from "./routers/overview";
 
 /**
  * This is the primary router for your server.
@@ -10,6 +12,8 @@ import { youtubeRouter } from "~/server/api/routers/youtube";
 export const appRouter = createTRPCRouter({
 	post: postRouter,
 	youtube: youtubeRouter,
+	user: userRouter,
+	overview: overviewRouter,
 });
 
 // export type definition of API

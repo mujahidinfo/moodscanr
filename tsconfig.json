@@ -27,11 +27,14 @@
 		/* Path Aliases */
 		"baseUrl": ".",
 		"paths": {
-			"~/*": ["./src/*"],
-			"@/assets/*": ["./public/assets/*"],
-			"~/public/*": ["./public/*"],
-			"~/server/*": ["./src/server/*"]
-		}
+      "~/*": ["./src/*"],
+      "@/assets/*": ["./public/assets/*"],
+      "~/public/*": ["./public/*"],
+      "~/server/*": ["./src/server/*"],
+      "~/components/*": ["./src/components/*"],
+      "~/utils/*": ["./src/utils/*"],
+      "~/hooks/*": ["./src/components/hooks/*"]
+    }
 	},
 	"include": [
 		"next-env.d.ts",
